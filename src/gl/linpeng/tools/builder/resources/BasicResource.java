@@ -3,6 +3,7 @@ package gl.linpeng.tools.builder.resources;
 import java.io.File;
 
 import gl.linpeng.tools.builder.service.ResourceType;
+import gl.linpeng.tools.builder.utils.FileUtils;
 
 /**
  * Basic resources of release builder,particular resource should extend this
@@ -17,6 +18,8 @@ public class BasicResource implements BuilderResource {
 	protected String path;
 	protected File source;
 	protected ResourceType type;
+
+	protected String content;
 
 	@Override
 	public ResourceType getType() {
@@ -59,6 +62,17 @@ public class BasicResource implements BuilderResource {
 
 	public void setSource(File source) {
 		this.source = source;
+	}
+
+	public String getContent() {
+		if (null == content) {
+			content = FileUtils.readContent(this);
+		}
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }
