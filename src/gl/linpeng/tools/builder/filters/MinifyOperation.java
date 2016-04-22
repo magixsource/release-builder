@@ -3,7 +3,6 @@ package gl.linpeng.tools.builder.filters;
 import gl.linpeng.tools.builder.resources.BasicResource;
 import gl.linpeng.tools.builder.resources.BuilderResource;
 import gl.linpeng.tools.builder.service.ResourceType;
-import gl.linpeng.tools.builder.utils.FileUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,18 +23,19 @@ public class MinifyOperation implements BuilderOperation {
 	public void onProcess(BuilderResource resource) {
 		BasicResource br = (BasicResource) resource;
 		logger.info("Processing resource [{}]", br.getSource().getName());
-		String original = FileUtils.readContent(br);
+		String original = br.getContent();
 		int lengthBegin = original.length();
 
 		// remove comment style //
 		original = original.replaceAll("\\/\\/.*", "");
 		// remove comment style /** */
 		original = original.replaceAll("/\\*(?:[^*]|\\*+[^*/])*\\*+/", "");
-		// remove spaces
+		// remove spaces {it's so stupid,cant remove var+space at least}
 		original = original.replaceAll("\\s+", "");
 
 		logger.debug("Processing result of [{}], [{}] -> [{}].", br.getSource()
 				.getName(), lengthBegin, original.length());
+		br.setContent(original);
 		this.content += original;
 	}
 
