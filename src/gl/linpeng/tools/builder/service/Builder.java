@@ -2,6 +2,7 @@ package gl.linpeng.tools.builder.service;
 
 import gl.linpeng.tools.builder.filters.BuilderOperation;
 import gl.linpeng.tools.builder.filters.MinifyOperation;
+import gl.linpeng.tools.builder.filters.UglifyOperation;
 import gl.linpeng.tools.builder.resources.BasicResource;
 import gl.linpeng.tools.builder.resources.BuilderResource;
 import gl.linpeng.tools.builder.utils.FileUtils;
@@ -37,7 +38,10 @@ public class Builder implements BuildService {
 		loadOperations();
 		loadResources();
 
-		for (BuilderOperation operation : operations) {
+		String result = "";
+
+		for (int i = 0; i <= operations.size() - 1; i++) {
+			BuilderOperation operation = operations.get(i);
 			for (BuilderResource resource : resources) {
 				if (operation.isSupported(resource)) {
 					operation.onProcess(resource);
@@ -46,8 +50,13 @@ public class Builder implements BuildService {
 			String tempResult = operation.toText();
 
 			logger.debug("{} process result -> {}", operation, tempResult);
+			if (i == operations.size() - 1) {
+				result = tempResult;
+			}
 		}
+		logger.info("final process result -> {}", result);
 
+		// store to target
 	}
 
 	@Override
@@ -74,6 +83,7 @@ public class Builder implements BuildService {
 		if (this.operations == null) {
 			this.operations = new ArrayList<BuilderOperation>();
 			this.operations.add(new MinifyOperation());
+			this.operations.add(new UglifyOperation());
 		}
 		return this.operations;
 	}
