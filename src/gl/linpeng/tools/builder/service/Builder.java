@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.filefilter.NameFileFilter;
+import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,7 +74,7 @@ public class Builder implements BuildService {
 	public List<BasicResource> loadResources() {
 		if (this.resources == null) {
 			this.resources = FileUtils.getFiles(this.source, includes,
-					new NameFileFilter(new String[] { "js", "app" }));
+					new RegexFileFilter("\\w+"));
 		}
 		return this.resources;
 	}
