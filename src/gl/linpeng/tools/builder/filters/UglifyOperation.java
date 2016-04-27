@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import gl.linpeng.tools.builder.resources.BasicResource;
-import gl.linpeng.tools.builder.resources.BuilderResource;
+import gl.linpeng.tools.builder.resources.Resource;
 import gl.linpeng.tools.builder.service.ResourceType;
 
 /**
@@ -18,7 +18,7 @@ public class UglifyOperation implements BuilderOperation {
 	private String content = "";
 
 	@Override
-	public void onProcess(BuilderResource resource) {
+	public void onProcess(Resource resource) {
 		BasicResource br = (BasicResource) resource;
 		logger.info("Processing resource [{}]", br.getSource().getName());
 		String original = br.getContent();
@@ -31,7 +31,7 @@ public class UglifyOperation implements BuilderOperation {
 	}
 
 	@Override
-	public boolean isSupported(BuilderResource resource) {
+	public boolean isSupported(Resource resource) {
 		return resource.getType().equals(ResourceType.JavaScript)
 				|| resource.getType().equals(ResourceType.Css);
 	}

@@ -1,7 +1,7 @@
 package gl.linpeng.tools.builder.filters;
 
 import gl.linpeng.tools.builder.resources.BasicResource;
-import gl.linpeng.tools.builder.resources.BuilderResource;
+import gl.linpeng.tools.builder.resources.Resource;
 import gl.linpeng.tools.builder.service.ResourceType;
 
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class MinifyOperation implements BuilderOperation {
 	private String content = "";
 
 	@Override
-	public void onProcess(BuilderResource resource) {
+	public void onProcess(Resource resource) {
 		BasicResource br = (BasicResource) resource;
 		logger.info("Processing resource [{}]", br.getSource().getName());
 		String original = br.getContent();
@@ -40,7 +40,7 @@ public class MinifyOperation implements BuilderOperation {
 	}
 
 	@Override
-	public boolean isSupported(BuilderResource resource) {
+	public boolean isSupported(Resource resource) {
 		return resource.getType().equals(ResourceType.JavaScript)
 				|| resource.getType().equals(ResourceType.Css);
 	}

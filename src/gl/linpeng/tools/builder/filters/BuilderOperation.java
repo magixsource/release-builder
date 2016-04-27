@@ -1,6 +1,6 @@
 package gl.linpeng.tools.builder.filters;
 
-import gl.linpeng.tools.builder.resources.BuilderResource;
+import gl.linpeng.tools.builder.resources.Resource;
 
 /**
  * Builder Operation
@@ -15,7 +15,7 @@ public interface BuilderOperation {
 	 * 
 	 * @param resource
 	 */
-	public void onProcess(BuilderResource resource);
+	public void onProcess(Resource resource);
 
 	/**
 	 * Check is this resouce supported
@@ -23,7 +23,7 @@ public interface BuilderOperation {
 	 * @param resource
 	 * @return
 	 */
-	public boolean isSupported(BuilderResource resource);
+	public boolean isSupported(Resource resource);
 
 	public String toText();
 }
