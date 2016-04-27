@@ -42,4 +42,18 @@ public interface BuildService {
 	 */
 	public void setup();
 
+	/**
+	 * register module to service
+	 * 
+	 * @param module
+	 */
+	public void registerModule(Module module);
+
+	/**
+	 * register operation to service
+	 * 
+	 * @param operation
+	 */
+	public void registerOperation(Operation operation);
+
 }

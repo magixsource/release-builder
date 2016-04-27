@@ -18,4 +18,5 @@ public interface LocalStorageBuildService extends BuildService {
 	 * @return LocalStorageModule collections
 	 */
 	public List<LocalStorageModule> loadLocalStorageModules();
+
 }
