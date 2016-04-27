@@ -1,6 +1,6 @@
 package gl.linpeng.tools.builder.utils;
 
-import gl.linpeng.tools.builder.resources.BasicResource;
+import gl.linpeng.tools.builder.resources.LocalStorageResource;
 import gl.linpeng.tools.builder.service.ResourceType;
 
 import java.io.File;
@@ -33,7 +33,7 @@ public class FileUtils {
 	 *            dir filter
 	 * @return result list
 	 */
-	public static List<BasicResource> getFiles(File root,
+	public static List<LocalStorageResource> getFiles(File root,
 			final List<String> includes, IOFileFilter dirFilter) {
 		Collection<File> files = org.apache.commons.io.FileUtils.listFiles(
 				root, new IOFileFilter() {
@@ -54,10 +54,10 @@ public class FileUtils {
 					}
 				}, dirFilter);
 
-		List<BasicResource> resources = new ArrayList<BasicResource>(
+		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>(
 				files.size());
 		for (File file : files) {
-			BasicResource br = new BasicResource();
+			LocalStorageResource br = new LocalStorageResource();
 			if (file.getName().endsWith(".js")) {
 				br.setType(ResourceType.JavaScript);
 			} else if (file.getName().endsWith(".css")) {
@@ -78,7 +78,7 @@ public class FileUtils {
 	 *            BasicResource
 	 * @return BasicResource content
 	 */
-	public static String readContent(BasicResource br) {
+	public static String readContent(LocalStorageResource br) {
 		File source = (File) br.getSource();
 		String content = null;
 		try {

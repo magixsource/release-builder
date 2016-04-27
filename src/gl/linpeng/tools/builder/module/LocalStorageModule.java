@@ -1,6 +1,6 @@
 package gl.linpeng.tools.builder.module;
 
-import gl.linpeng.tools.builder.resources.BasicResource;
+import gl.linpeng.tools.builder.resources.LocalStorageResource;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class LocalStorageModule extends Module {
 
-	private List<BasicResource> resources;
+	private List<LocalStorageResource> resources;
 
-	public List<BasicResource> getResources() {
+	public List<LocalStorageResource> getResources() {
 		return resources;
 	}
 
-	public void setResources(List<BasicResource> resources) {
+	public void setResources(List<LocalStorageResource> resources) {
 		this.resources = resources;
 	}
 
