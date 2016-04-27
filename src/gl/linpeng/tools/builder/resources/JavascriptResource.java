@@ -6,6 +6,6 @@ package gl.linpeng.tools.builder.resources;
  * @author linpeng
  *
  */
-public class JavascriptResource extends BasicResource {
-	
+public class JavascriptResource extends FileResource {
+
 }

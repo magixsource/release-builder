@@ -6,6 +6,6 @@ package gl.linpeng.tools.builder.resources;
  * @author linpeng
  *
  */
-public class CssResource extends BasicResource {
+public class CssResource extends FileResource {
 
 }
