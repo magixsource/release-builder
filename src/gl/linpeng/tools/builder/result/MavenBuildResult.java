@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.result;
 
+import gl.linpeng.tools.builder.service.BuildService;
+
 /**
  * Maven build result parse result as a pom.xml
  * 
@@ -9,12 +11,12 @@ package gl.linpeng.tools.builder.result;
 public class MavenBuildResult implements BuildResult {
 
 	@Override
-	public BuildResult toResult() {
+	public String toText() {
 		return null;
 	}
 
 	@Override
-	public String toText() {
+	public BuildResult toResult(BuildService service) {
 		return null;
 	}
 

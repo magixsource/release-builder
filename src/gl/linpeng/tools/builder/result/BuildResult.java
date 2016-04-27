@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.result;
 
+import gl.linpeng.tools.builder.service.BuildService;
+
 /**
  * Build result Model,BuildResult is a result of process after builderService
  * 
@@ -13,7 +15,7 @@ public interface BuildResult {
 	 * 
 	 * @return
 	 */
-	public BuildResult toResult();
+	public BuildResult toResult(BuildService service);
 
 	/**
 	 * Parse BuildResult to readable string
