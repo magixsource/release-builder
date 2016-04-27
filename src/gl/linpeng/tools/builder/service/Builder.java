@@ -1,17 +1,16 @@
 package gl.linpeng.tools.builder.service;
 
-import gl.linpeng.tools.builder.filters.BuilderOperation;
 import gl.linpeng.tools.builder.filters.MinifyOperation;
+import gl.linpeng.tools.builder.filters.Operation;
 import gl.linpeng.tools.builder.filters.UglifyOperation;
-import gl.linpeng.tools.builder.resources.BasicResource;
-import gl.linpeng.tools.builder.resources.BuilderResource;
+import gl.linpeng.tools.builder.resources.LocalStorageResource;
+import gl.linpeng.tools.builder.resources.Resource;
 import gl.linpeng.tools.builder.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +24,8 @@ import org.slf4j.LoggerFactory;
 public class Builder implements BuildService {
 	final Logger logger = LoggerFactory.getLogger(Builder.class);
 
-	private List<BasicResource> resources;
-	private List<BuilderOperation> operations;
+	private List<LocalStorageResource> resources;
+	private List<Operation> operations;
 
 	private List<String> includes;
 	private List<String> excludes;
@@ -42,8 +41,8 @@ public class Builder implements BuildService {
 		String result = "";
 
 		for (int i = 0; i <= operations.size() - 1; i++) {
-			BuilderOperation operation = operations.get(i);
-			for (BuilderResource resource : resources) {
+			Operation operation = operations.get(i);
+			for (Resource resource : resources) {
 				if (operation.isSupported(resource)) {
 					operation.onProcess(resource);
 				}
@@ -71,7 +70,7 @@ public class Builder implements BuildService {
 	}
 
 	@Override
-	public List<BasicResource> loadResources() {
+	public List<LocalStorageResource> loadResources() {
 		if (this.resources == null) {
 			this.resources = FileUtils.getFiles(this.source, includes,
 					new RegexFileFilter("\\w+"));
@@ -80,9 +79,9 @@ public class Builder implements BuildService {
 	}
 
 	@Override
-	public List<BuilderOperation> loadOperations() {
+	public List<Operation> loadOperations() {
 		if (this.operations == null) {
-			this.operations = new ArrayList<BuilderOperation>();
+			this.operations = new ArrayList<Operation>();
 			this.operations.add(new MinifyOperation());
 			this.operations.add(new UglifyOperation());
 		}

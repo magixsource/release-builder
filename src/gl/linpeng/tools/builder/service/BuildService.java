@@ -1,7 +1,7 @@
 package gl.linpeng.tools.builder.service;
 
-import gl.linpeng.tools.builder.filters.BuilderOperation;
-import gl.linpeng.tools.builder.resources.BasicResource;
+import gl.linpeng.tools.builder.filters.Operation;
+import gl.linpeng.tools.builder.resources.LocalStorageResource;
 
 import java.io.File;
 import java.util.List;
@@ -35,14 +35,14 @@ public interface BuildService {
 	 * 
 	 * @return resources
 	 */
-	public List<BasicResource> loadResources();
+	public List<LocalStorageResource> loadResources();
 
 	/**
 	 * Load operations if operations is null
 	 * 
 	 * @return operations
 	 */
-	public List<BuilderOperation> loadOperations();
+	public List<Operation> loadOperations();
 
 	/**
 	 * Names of file which should include

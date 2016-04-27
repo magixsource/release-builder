@@ -8,7 +8,7 @@ import gl.linpeng.tools.builder.resources.Resource;
  * @author linpeng
  *
  */
-public interface BuilderOperation {
+public interface Operation {
 
 	/**
 	 * internal opeartion
@@ -25,5 +25,10 @@ public interface BuilderOperation {
 	 */
 	public boolean isSupported(Resource resource);
 
+	/**
+	 * temp result of this handler
+	 * 
+	 * @return
+	 */
 	public String toText();
 }

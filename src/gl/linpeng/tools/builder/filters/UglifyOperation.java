@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author linpeng
  *
  */
-public class UglifyOperation implements BuilderOperation {
+public class UglifyOperation implements Operation {
 	final Logger logger = LoggerFactory.getLogger(UglifyOperation.class);
 	private String content = "";
 

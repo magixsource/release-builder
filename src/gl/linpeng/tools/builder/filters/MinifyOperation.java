@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author linpeng
  *
  */
-public class MinifyOperation implements BuilderOperation {
+public class MinifyOperation implements Operation {
 
 	final Logger logger = LoggerFactory.getLogger(MinifyOperation.class);
 
