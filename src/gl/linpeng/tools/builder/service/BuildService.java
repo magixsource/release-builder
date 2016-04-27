@@ -1,13 +1,14 @@
 package gl.linpeng.tools.builder.service;
 
 import gl.linpeng.tools.builder.filters.Operation;
-import gl.linpeng.tools.builder.resources.LocalStorageResource;
+import gl.linpeng.tools.builder.module.Module;
+import gl.linpeng.tools.builder.result.BuildResult;
 
-import java.io.File;
 import java.util.List;
 
 /**
- * What should build service is
+ * build service load modules and operation,and process module by operation,get
+ * one build result bean in the end.
  * 
  * @author linpeng
  *
@@ -15,27 +16,11 @@ import java.util.List;
 public interface BuildService {
 
 	/**
-	 * Where build sources store
+	 * Load modules to service
 	 * 
-	 * @param file
-	 *            source store dir
+	 * @return modules
 	 */
-	public void setSource(File file);
-
-	/**
-	 * Where build result store
-	 * 
-	 * @param file
-	 *            result store dir
-	 */
-	public void setTarget(File file);
-
-	/**
-	 * Load resources if resources is null
-	 * 
-	 * @return resources
-	 */
-	public List<LocalStorageResource> loadResources();
+	public List<Module> loadModules();
 
 	/**
 	 * Load operations if operations is null
@@ -45,25 +30,16 @@ public interface BuildService {
 	public List<Operation> loadOperations();
 
 	/**
-	 * Names of file which should include
+	 * load operations and modules,and make operation process module and store
+	 * process result.
 	 * 
-	 * @param includes
-	 * @return
+	 * @return build result
 	 */
-	public List<String> setIncludes(List<String> includes);
+	public BuildResult build();
 
 	/**
-	 * Names of file which should exclude
-	 * 
-	 * @param excludes
-	 * @return
+	 * build service setup,load modules and operations canbe here.
 	 */
-	public List<String> setExcludes(List<String> excludes);
-
-	/**
-	 * load operations and resources,and make operation process resource and
-	 * store process result.
-	 */
-	public void build();
+	public void setup();
 
 }
