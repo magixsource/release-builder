@@ -13,7 +13,7 @@ public class Module {
 	private String id;
 	private String name;
 	private String type;
-	private List<Module> dependencies;
+	private List<? extends Module> dependencies;
 
 	public String getId() {
 		return id;
@@ -39,11 +39,11 @@ public class Module {
 		this.type = type;
 	}
 
-	public List<Module> getDependencies() {
+	public List<? extends Module> getDependencies() {
 		return dependencies;
 	}
 
-	public void setDependencies(List<Module> dependencies) {
+	public void setDependencies(List<? extends Module> dependencies) {
 		this.dependencies = dependencies;
 	}
 
