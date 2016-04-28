@@ -7,7 +7,9 @@ import gl.linpeng.tools.builder.result.BuildResult;
 import gl.linpeng.tools.builder.result.FrontendBuildResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,8 @@ public class Builder implements LocalStorageBuildService {
 
 	private List<LocalStorageModule> modules;
 	private List<Operation> operations;
+	// store handle result
+	private Map<String, Object> context = new HashMap<String, Object>();
 	private FrontendBuildResult buildResult = new FrontendBuildResult();
 
 	@Override
@@ -73,6 +77,23 @@ public class Builder implements LocalStorageBuildService {
 			this.operations = new ArrayList<Operation>();
 		}
 		this.operations.add(operation);
+	}
+
+	@Override
+	public Map<String, Object> getContext() {
+		return context;
+	}
+
+	public void setContext(Map<String, Object> context) {
+		this.context = context;
+	}
+
+	public FrontendBuildResult getBuildResult() {
+		return buildResult;
+	}
+
+	public void setBuildResult(FrontendBuildResult buildResult) {
+		this.buildResult = buildResult;
 	}
 
 }
