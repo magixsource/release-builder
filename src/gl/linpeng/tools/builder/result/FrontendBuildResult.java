@@ -7,6 +7,7 @@ import gl.linpeng.tools.builder.service.BuildService;
 import gl.linpeng.tools.builder.service.LocalStorageBuildService;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +30,10 @@ public class FrontendBuildResult implements BuildResult {
 	@Override
 	public BuildResult toResult(BuildService service) {
 		LocalStorageBuildService _service = (LocalStorageBuildService) service;
-		String result = "";
+
 		List<Operation> operations = _service.loadOperations();
 		List<LocalStorageModule> modules = _service.loadLocalStorageModules();
+		Map<String, Object> context = _service.getContext();
 
 		for (int i = 0; i <= operations.size() - 1; i++) {
 			Operation operation = operations.get(i);
@@ -41,12 +43,26 @@ public class FrontendBuildResult implements BuildResult {
 			String tempResult = operation.toText();
 
 			logger.debug("{} process result -> {}", operation, tempResult);
-			if (i == operations.size() - 1) {
-				result = tempResult;
-			}
+
 		}
-		logger.info("final process result -> {}", result);
+
+		for (LocalStorageModule module : modules) {
+			storeToContext(module, context);
+		}
+
+		logger.info("final process result -> {}", context);
 		return this;
+	}
+
+	private void storeToContext(LocalStorageModule module,
+			Map<String, Object> context) {
+		for (LocalStorageResource resource : module.getResources()) {
+			String key = resource.getType().name();
+			String content = context.get(key) == null ? "" : context.get(key)
+					.toString();
+			content += resource.getContent();
+			context.put(key, content);
+		}
 	}
 
 	/**
