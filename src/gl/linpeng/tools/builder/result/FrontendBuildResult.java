@@ -5,6 +5,7 @@ import gl.linpeng.tools.builder.module.LocalStorageModule;
 import gl.linpeng.tools.builder.resources.LocalStorageResource;
 import gl.linpeng.tools.builder.service.BuildService;
 import gl.linpeng.tools.builder.service.LocalStorageBuildService;
+import gl.linpeng.tools.builder.service.ResourceType;
 
 import java.util.List;
 import java.util.Map;
@@ -35,15 +36,13 @@ public class FrontendBuildResult implements BuildResult {
 		List<LocalStorageModule> modules = _service.loadLocalStorageModules();
 		Map<String, Object> context = _service.getContext();
 
-		for (int i = 0; i <= operations.size() - 1; i++) {
-			Operation operation = operations.get(i);
+		for (Operation operation : operations) {
 			for (LocalStorageModule module : modules) {
 				processModule(module, operation);
 			}
 			String tempResult = operation.toText();
 
 			logger.debug("{} process result -> {}", operation, tempResult);
-
 		}
 
 		for (LocalStorageModule module : modules) {
@@ -60,7 +59,12 @@ public class FrontendBuildResult implements BuildResult {
 			String key = resource.getType().name();
 			String content = context.get(key) == null ? "" : context.get(key)
 					.toString();
-			content += resource.getContent();
+			if (ResourceType.Image.equals(resource.getType())
+					|| ResourceType.Directory.equals(resource.getType())) {
+				content += resource.getPath() + ";";
+			} else {
+				content += resource.getContent();
+			}
 			context.put(key, content);
 		}
 	}
