@@ -5,6 +5,7 @@ import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.result.BuildResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * build service load modules and operation,and process module by operation,get
@@ -55,5 +56,12 @@ public interface BuildService {
 	 * @param operation
 	 */
 	public void registerOperation(Operation operation);
+
+	/**
+	 * Service context
+	 * 
+	 * @return
+	 */
+	public Map<String, Object> getContext();
 
 }
