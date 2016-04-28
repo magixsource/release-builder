@@ -7,9 +7,12 @@ import gl.linpeng.tools.builder.service.BuildService;
 import gl.linpeng.tools.builder.service.LocalStorageBuildService;
 import gl.linpeng.tools.builder.service.ResourceType;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +53,40 @@ public class FrontendBuildResult implements BuildResult {
 		}
 
 		logger.info("final process result -> {}", context);
+
+		// final result
+		String basePath = FileUtils.getTempDirectoryPath();
+		for (Map.Entry<String, Object> entry : context.entrySet()) {
+			try {
+				if (entry.getKey().equalsIgnoreCase("Css")) {
+					File customCss = FileUtils.getFile(basePath
+							+ "css\\frontend.custom.css");
+					FileUtils.write(customCss, entry.getValue().toString());
+				} else if (entry.getKey().equalsIgnoreCase("JavaScript")) {
+					File customJs = FileUtils.getFile(basePath
+							+ "js\\frontend.custom.js");
+					FileUtils.write(customJs, entry.getValue().toString());
+				} else if (entry.getKey().equalsIgnoreCase("Image")) {
+					File customImgDir = FileUtils.getFile(basePath + "\\img");
+					String[] paths = entry.getValue().toString().split(";");
+					for (String path : paths) {
+						FileUtils.copyFileToDirectory(FileUtils.getFile(path),
+								customImgDir);
+					}
+				} else if (entry.getKey().equalsIgnoreCase("Directory")) {
+					File destDir = FileUtils.getFile(basePath + "\\lib");
+					String[] paths = entry.getValue().toString().split(";");
+					for (String path : paths) {
+						FileUtils.copyDirectoryToDirectory(
+								FileUtils.getFile(path), destDir);
+					}
+				}
+				// TODO store as zip result
+
+			} catch (IOException e) {
+				logger.error("Frontend Build parse error. {}", e);
+			}
+		}
 		return this;
 	}
 
