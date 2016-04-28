@@ -8,8 +8,10 @@ import gl.linpeng.tools.builder.result.FrontendBuildResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,8 @@ public class Builder implements LocalStorageBuildService {
 	private Map<String, Object> context = new HashMap<String, Object>();
 	private FrontendBuildResult buildResult = new FrontendBuildResult();
 
+	private boolean isModuleSorted = false;
+
 	@Override
 	public List<Operation> loadOperations() {
 		return this.operations;
@@ -41,7 +45,37 @@ public class Builder implements LocalStorageBuildService {
 			// this.modules = FileUtils.getFiles(this.source, includes,
 			// new RegexFileFilter("\\w+"));
 		}
+
+		// re-sort modules, make dependencies in collections
+		if (!isModuleSorted) {
+			Set<LocalStorageModule> sortedModules = new HashSet<LocalStorageModule>();
+			sortModules(modules, sortedModules);
+			modules = new ArrayList<LocalStorageModule>();
+			modules.addAll(sortedModules);
+
+			isModuleSorted = true;
+		}
+		// sorted
 		return this.modules;
+	}
+
+	/**
+	 * Sort module list
+	 * 
+	 * @param modules
+	 * @param sortedModules
+	 */
+	@SuppressWarnings("unchecked")
+	private void sortModules(List<LocalStorageModule> modules,
+			Set<LocalStorageModule> sortedModules) {
+		for (LocalStorageModule module : modules) {
+			sortedModules.add(module);
+			if (module.getDependencies() != null) {
+				List<LocalStorageModule> dependencies = (List<LocalStorageModule>) module
+						.getDependencies();
+				sortModules(dependencies, sortedModules);
+			}
+		}
 	}
 
 	@Override
