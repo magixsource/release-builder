@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.resources;
 
+import gl.linpeng.tools.builder.service.ResourceType;
+
 /**
  * Javascript Resource class
  * 
@@ -7,5 +9,7 @@ package gl.linpeng.tools.builder.resources;
  *
  */
 public class JavascriptResource extends FileResource {
-
+	public JavascriptResource() {
+		this.setType(ResourceType.JavaScript);
+	}
 }

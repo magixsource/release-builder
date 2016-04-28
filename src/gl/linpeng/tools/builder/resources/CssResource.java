@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.resources;
 
+import gl.linpeng.tools.builder.service.ResourceType;
+
 /**
  * Css resources class
  * 
@@ -7,5 +9,7 @@ package gl.linpeng.tools.builder.resources;
  *
  */
 public class CssResource extends FileResource {
-
+	public CssResource() {
+		this.setType(ResourceType.Css);
+	}
 }
