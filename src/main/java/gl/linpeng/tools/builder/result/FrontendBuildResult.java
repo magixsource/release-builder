@@ -44,7 +44,6 @@ public class FrontendBuildResult implements BuildResult {
 				processModule(module, operation);
 			}
 			String tempResult = operation.toText();
-
 			logger.debug("{} process result -> {}", operation, tempResult);
 		}
 
@@ -54,40 +53,46 @@ public class FrontendBuildResult implements BuildResult {
 
 		logger.info("final process result -> {}", context);
 
-		// final result
+		// final custom result
+		customResult(context);
+		return this;
+	}
+
+	/**
+	 * Custom result what we wanna
+	 * 
+	 * @param context
+	 */
+	private void customResult(Map<String, Object> context) {
 		String basePath = FileUtils.getTempDirectoryPath();
 		for (Map.Entry<String, Object> entry : context.entrySet()) {
 			try {
-				if (entry.getKey().equalsIgnoreCase("Css")) {
+				if ("Css".equalsIgnoreCase(entry.getKey())) {
 					File customCss = FileUtils.getFile(basePath
 							+ "css\\frontend.custom.css");
 					FileUtils.write(customCss, entry.getValue().toString());
-				} else if (entry.getKey().equalsIgnoreCase("JavaScript")) {
+				} else if ("JavaScript".equalsIgnoreCase(entry.getKey())) {
 					File customJs = FileUtils.getFile(basePath
 							+ "js\\frontend.custom.js");
 					FileUtils.write(customJs, entry.getValue().toString());
-				} else if (entry.getKey().equalsIgnoreCase("Image")) {
+				} else if ("Image".equalsIgnoreCase(entry.getKey())) {
 					File customImgDir = FileUtils.getFile(basePath + "\\img");
 					String[] paths = entry.getValue().toString().split(";");
-					for (String path : paths) {
-						FileUtils.copyFileToDirectory(FileUtils.getFile(path),
-								customImgDir);
-					}
-				} else if (entry.getKey().equalsIgnoreCase("Directory")) {
+					gl.linpeng.tools.builder.utils.FileUtils
+							.copyFilesToDirectory(paths, customImgDir);
+				} else if ("Directory".equalsIgnoreCase(entry.getKey())) {
 					File destDir = FileUtils.getFile(basePath + "\\lib");
 					String[] paths = entry.getValue().toString().split(";");
-					for (String path : paths) {
-						FileUtils.copyDirectoryToDirectory(
-								FileUtils.getFile(path), destDir);
-					}
+					gl.linpeng.tools.builder.utils.FileUtils
+							.copyDirectorysToDirectory(paths, destDir);
 				}
 				// TODO store as zip result
 
 			} catch (IOException e) {
-				logger.error("Frontend Build parse error. {}", e);
+				logger.error("Frontend Build CustomResult error. {}", e);
 			}
 		}
-		return this;
+
 	}
 
 	private void storeToContext(LocalStorageModule module,
