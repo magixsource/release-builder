@@ -22,6 +22,9 @@ import org.slf4j.LoggerFactory;
 public class FileUtils {
 	static final Logger logger = LoggerFactory.getLogger(FileUtils.class);
 
+	private FileUtils() {
+	}
+
 	/**
 	 * List files from root where file name in includes
 	 * 
