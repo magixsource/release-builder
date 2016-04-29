@@ -61,9 +61,9 @@ public class FileUtils {
 		for (File file : files) {
 			LocalStorageResource br = new LocalStorageResource();
 			if (file.getName().endsWith(".js")) {
-				br.setType(ResourceType.JavaScript);
+				br.setType(ResourceType.JAVASCRIPT);
 			} else if (file.getName().endsWith(".css")) {
-				br.setType(ResourceType.Css);
+				br.setType(ResourceType.CSS);
 			}
 			br.setPath(file.getPath());
 			br.setSource(file);
@@ -81,7 +81,7 @@ public class FileUtils {
 	 * @return BasicResource content
 	 */
 	public static String readContent(LocalStorageResource br) {
-		File source = (File) br.getSource();
+		File source = br.getSource();
 		String content = null;
 		try {
 			content = org.apache.commons.io.FileUtils.readFileToString(source,

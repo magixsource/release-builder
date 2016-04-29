@@ -10,6 +10,6 @@ import gl.linpeng.tools.builder.service.ResourceType;
  */
 public class CssResource extends FileResource {
 	public CssResource() {
-		this.setType(ResourceType.Css);
+		this.setType(ResourceType.CSS);
 	}
 }

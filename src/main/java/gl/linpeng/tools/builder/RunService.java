@@ -41,7 +41,7 @@ public class RunService {
 
 		// register modules
 		JavascriptResource js = new JavascriptResource();
-		js.setType(ResourceType.JavaScript);
+		js.setType(ResourceType.JAVASCRIPT);
 		js.setSource(new File(basePath + "js\\app\\sinobest.image.js"));
 		LocalStorageModule module = new LocalStorageModule();
 		module.setId("image");
@@ -50,17 +50,17 @@ public class RunService {
 		List<LocalStorageResource> resources = new ArrayList<>();
 		resources.add(js);
 		CssResource css = new CssResource();
-		css.setType(ResourceType.Css);
+		css.setType(ResourceType.CSS);
 		css.setSource(new File(basePath + "css\\sinobest.image.css"));
 		resources.add(css);
 
 		FileResource img1 = new FileResource();
-		img1.setType(ResourceType.Image);
+		img1.setType(ResourceType.IMAGE);
 		img1.setSource(new File(basePath + "img\\zoomin.cur"));
 		resources.add(img1);
 
 		FileResource img2 = new FileResource();
-		img2.setType(ResourceType.Image);
+		img2.setType(ResourceType.IMAGE);
 		img2.setSource(new File(basePath + "img\\photoTool.gif"));
 		resources.add(img2);
 

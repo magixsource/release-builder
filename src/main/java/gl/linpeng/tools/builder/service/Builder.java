@@ -99,8 +99,8 @@ public class Builder implements LocalStorageBuildService {
 		if (this.modules == null) {
 			this.modules = new ArrayList<>();
 		}
-		LocalStorageModule _module = (LocalStorageModule) module;
-		this.modules.add(_module);
+		LocalStorageModule localStorageModule = (LocalStorageModule) module;
+		this.modules.add(localStorageModule);
 	}
 
 	@Override

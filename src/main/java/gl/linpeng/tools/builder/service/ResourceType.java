@@ -7,5 +7,5 @@ package gl.linpeng.tools.builder.service;
  *
  */
 public enum ResourceType {
-	JavaScript, Css, Image, Directory
+	JAVASCRIPT, CSS, IMAGE, DIRECTORY
 }
