@@ -47,7 +47,7 @@ public class RunService {
 		module.setId("image");
 		module.setName("image");
 		module.setType("file");
-		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>();
+		List<LocalStorageResource> resources = new ArrayList<>();
 		resources.add(js);
 		CssResource css = new CssResource();
 		css.setType(ResourceType.Css);
@@ -72,13 +72,13 @@ public class RunService {
 		dependency.setName("date");
 		dependency.setType("dir");
 
-		List<LocalStorageResource> resources2 = new ArrayList<LocalStorageResource>();
+		List<LocalStorageResource> resources2 = new ArrayList<>();
 		DirectoryResource dir = new DirectoryResource();
 		dir.setSource(new File(basePath + "js\\lib\\My97DatePicker"));
 		resources2.add(dir);
 
 		dependency.setResources(resources2);
-		List<Module> dependencies = new ArrayList<Module>();
+		List<Module> dependencies = new ArrayList<>();
 		dependencies.add(dependency);
 		module.setDependencies(dependencies);
 
