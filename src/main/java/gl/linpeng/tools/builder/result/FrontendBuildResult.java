@@ -33,11 +33,12 @@ public class FrontendBuildResult implements BuildResult {
 
 	@Override
 	public BuildResult toResult(BuildService service) {
-		LocalStorageBuildService _service = (LocalStorageBuildService) service;
+		LocalStorageBuildService localStorageService = (LocalStorageBuildService) service;
 
-		List<Operation> operations = _service.loadOperations();
-		List<LocalStorageModule> modules = _service.loadLocalStorageModules();
-		Map<String, Object> context = _service.getContext();
+		List<Operation> operations = localStorageService.loadOperations();
+		List<LocalStorageModule> modules = localStorageService
+				.loadLocalStorageModules();
+		Map<String, Object> context = localStorageService.getContext();
 
 		for (Operation operation : operations) {
 			for (LocalStorageModule module : modules) {
@@ -101,8 +102,8 @@ public class FrontendBuildResult implements BuildResult {
 			String key = resource.getType().name();
 			String content = context.get(key) == null ? "" : context.get(key)
 					.toString();
-			if (ResourceType.Image.equals(resource.getType())
-					|| ResourceType.Directory.equals(resource.getType())) {
+			if (ResourceType.IMAGE.equals(resource.getType())
+					|| ResourceType.DIRECTORY.equals(resource.getType())) {
 				content += resource.getPath() + ";";
 			} else {
 				content += resource.getContent();
