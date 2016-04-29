@@ -1,10 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ReleaseBuilder</groupId>
-	<artifactId>ReleaseBuilder</artifactId>
+	<groupId>gl.linpeng</groupId>
+	<artifactId>release-builder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Release builder program by linpeng</name>
+	<name>release-builder</name>
+	<description>
+		Release builder by linpeng
+	</description>
+	<developers>
+		<developer>
+			<email>magixsource.cn#gmail.com</email>
+			<name>linpeng</name>
+		</developer>
+	</developers>
+	<properties>
+		<jdk.version>1.8</jdk.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -28,8 +40,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
 			<!-- test surefire -->
@@ -40,4 +52,29 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!-- Sonarqube -->
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- 数据库连接URL -->
+				<sonar.jdbc.url>
+					jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8
+				</sonar.jdbc.url>
+				<!-- 数据库驱动 -->
+				<sonar.jdbc.driver>
+					com.mysql.jdbc.Driver
+				</sonar.jdbc.driver>
+				<!-- 数据库连接用户名 -->
+				<sonar.jdbc.username>sonar</sonar.jdbc.username>
+				<!-- 数据库连接密码 -->
+				<sonar.jdbc.password>sonar</sonar.jdbc.password>
+				<!-- Sonar应用的URL -->
+				<sonar.host.url>http://localhost:9000</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
 </project>
