@@ -91,4 +91,44 @@ public class FileUtils {
 		}
 		return content;
 	}
+
+	/**
+	 * Copy files to directory
+	 * 
+	 * @param paths
+	 *            file paths
+	 * @param target
+	 *            directory
+	 */
+	public static void copyFilesToDirectory(String[] paths, File targetDir) {
+		try {
+			for (String path : paths) {
+				org.apache.commons.io.FileUtils.copyFileToDirectory(
+						org.apache.commons.io.FileUtils.getFile(path),
+						targetDir);
+			}
+		} catch (IOException e) {
+			logger.error("CopyFilesToDirectory error. {}", e);
+		}
+	}
+
+	/**
+	 * Copy whole directory to directory
+	 * 
+	 * @param paths
+	 *            directory paths
+	 * @param targetDir
+	 *            target directory
+	 */
+	public static void copyDirectorysToDirectory(String[] paths, File targetDir) {
+		try {
+			for (String path : paths) {
+				org.apache.commons.io.FileUtils.copyDirectoryToDirectory(
+						org.apache.commons.io.FileUtils.getFile(path),
+						targetDir);
+			}
+		} catch (IOException e) {
+			logger.error("CopyDirectorysToDirectory error. {}", e);
+		}
+	}
 }
