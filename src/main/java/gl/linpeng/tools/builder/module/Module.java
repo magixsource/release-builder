@@ -39,7 +39,8 @@ public class Module {
 		this.type = type;
 	}
 
-	public List<? extends Module> getDependencies() {
+	@SuppressWarnings("rawtypes")
+	public List getDependencies() {
 		return dependencies;
 	}
 
