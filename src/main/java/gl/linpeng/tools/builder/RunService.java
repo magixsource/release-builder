@@ -25,6 +25,9 @@ import java.util.List;
  */
 public class RunService {
 
+	private RunService() {
+	}
+
 	public static void main(String[] args) {
 
 		Builder builder = new Builder();
