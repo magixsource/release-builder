@@ -87,13 +87,13 @@ public class FrontendBuildResult implements BuildResult {
 					gl.linpeng.tools.builder.utils.FileUtils
 							.copyDirectorysToDirectory(paths, destDir);
 				}
-				// TODO store as zip result
 
 			} catch (IOException e) {
 				logger.error("Frontend Build CustomResult error. {}", e);
 			}
 		}
-
+		// zip result
+		gl.linpeng.tools.builder.utils.FileUtils.zip(basePath);
 	}
 
 	private void storeToContext(LocalStorageModule module,
