@@ -6,7 +6,7 @@ import java.util.List;
  * Module is a bean of builder process target
  * 
  * @author linpeng
- *
+ * 
  */
 public class Module {
 
@@ -39,7 +39,7 @@ public class Module {
 		this.type = type;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("unchecked")
 	public List getDependencies() {
 		return dependencies;
 	}
