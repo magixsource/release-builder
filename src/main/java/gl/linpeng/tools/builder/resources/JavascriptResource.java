@@ -10,6 +10,6 @@ import gl.linpeng.tools.builder.service.ResourceType;
  */
 public class JavascriptResource extends FileResource {
 	public JavascriptResource() {
-		this.setType(ResourceType.JavaScript);
+		this.setType(ResourceType.JAVASCRIPT);
 	}
 }

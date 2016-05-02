@@ -28,7 +28,7 @@ public class Builder implements LocalStorageBuildService {
 	private List<LocalStorageModule> modules;
 	private List<Operation> operations;
 	// store handle result
-	private Map<String, Object> context = new HashMap<String, Object>();
+	private Map<String, Object> context = new HashMap<>();
 	private FrontendBuildResult buildResult = new FrontendBuildResult();
 
 	private boolean isModuleSorted = false;
@@ -42,15 +42,13 @@ public class Builder implements LocalStorageBuildService {
 	public List<LocalStorageModule> loadLocalStorageModules() {
 		if (this.modules == null) {
 			throw new NullPointerException("Modules can't be null.");
-			// this.modules = FileUtils.getFiles(this.source, includes,
-			// new RegexFileFilter("\\w+"));
 		}
 
 		// re-sort modules, make dependencies in collections
 		if (!isModuleSorted) {
-			Set<LocalStorageModule> sortedModules = new HashSet<LocalStorageModule>();
+			Set<LocalStorageModule> sortedModules = new HashSet<>();
 			sortModules(modules, sortedModules);
-			modules = new ArrayList<LocalStorageModule>();
+			modules = new ArrayList<>();
 			modules.addAll(sortedModules);
 
 			isModuleSorted = true;
@@ -99,16 +97,16 @@ public class Builder implements LocalStorageBuildService {
 	@Override
 	public void registerModule(Module module) {
 		if (this.modules == null) {
-			this.modules = new ArrayList<LocalStorageModule>();
+			this.modules = new ArrayList<>();
 		}
-		LocalStorageModule _module = (LocalStorageModule) module;
-		this.modules.add(_module);
+		LocalStorageModule localStorageModule = (LocalStorageModule) module;
+		this.modules.add(localStorageModule);
 	}
 
 	@Override
 	public void registerOperation(Operation operation) {
 		if (this.operations == null) {
-			this.operations = new ArrayList<Operation>();
+			this.operations = new ArrayList<>();
 		}
 		this.operations.add(operation);
 	}

@@ -20,8 +20,8 @@ public class CopyOperation implements Operation {
 
 	@Override
 	public boolean isSupported(Resource resource) {
-		return resource.getType().equals(ResourceType.Image)
-				|| resource.getType().equals(ResourceType.Directory);
+		return resource.getType().equals(ResourceType.IMAGE)
+				|| resource.getType().equals(ResourceType.DIRECTORY);
 	}
 
 	@Override

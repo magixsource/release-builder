@@ -31,8 +31,8 @@ public class UglifyOperation implements Operation {
 
 	@Override
 	public boolean isSupported(Resource resource) {
-		return resource.getType().equals(ResourceType.JavaScript)
-				|| resource.getType().equals(ResourceType.Css);
+		return resource.getType().equals(ResourceType.JAVASCRIPT)
+				|| resource.getType().equals(ResourceType.CSS);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class MinifyOperation implements Operation {
 		original = original.replaceAll("\\/\\/.*", "");
 		// remove comment style /** */
 		original = original.replaceAll("/\\*(?:[^*]|\\*+[^*/])*\\*+/", "");
-		// remove spaces {it's so stupid,cant remove var+space at least}
+		// remove spaces ,it's so stupid,cant remove var and space at least
 		original = original.replaceAll("\\s+", "");
 
 		logger.debug("Processing result of [{}], [{}] -> [{}].", br.getSource()
@@ -41,8 +41,8 @@ public class MinifyOperation implements Operation {
 
 	@Override
 	public boolean isSupported(Resource resource) {
-		return resource.getType().equals(ResourceType.JavaScript)
-				|| resource.getType().equals(ResourceType.Css);
+		return resource.getType().equals(ResourceType.JAVASCRIPT)
+				|| resource.getType().equals(ResourceType.CSS);
 	}
 
 	@Override

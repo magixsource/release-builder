@@ -33,18 +33,18 @@ public class FrontendBuildResult implements BuildResult {
 
 	@Override
 	public BuildResult toResult(BuildService service) {
-		LocalStorageBuildService _service = (LocalStorageBuildService) service;
+		LocalStorageBuildService localStorageService = (LocalStorageBuildService) service;
 
-		List<Operation> operations = _service.loadOperations();
-		List<LocalStorageModule> modules = _service.loadLocalStorageModules();
-		Map<String, Object> context = _service.getContext();
+		List<Operation> operations = localStorageService.loadOperations();
+		List<LocalStorageModule> modules = localStorageService
+				.loadLocalStorageModules();
+		Map<String, Object> context = localStorageService.getContext();
 
 		for (Operation operation : operations) {
 			for (LocalStorageModule module : modules) {
 				processModule(module, operation);
 			}
 			String tempResult = operation.toText();
-
 			logger.debug("{} process result -> {}", operation, tempResult);
 		}
 
@@ -54,40 +54,46 @@ public class FrontendBuildResult implements BuildResult {
 
 		logger.info("final process result -> {}", context);
 
-		// final result
+		// final custom result
+		customResult(context);
+		return this;
+	}
+
+	/**
+	 * Custom result what we wanna
+	 * 
+	 * @param context
+	 */
+	private void customResult(Map<String, Object> context) {
 		String basePath = FileUtils.getTempDirectoryPath();
 		for (Map.Entry<String, Object> entry : context.entrySet()) {
 			try {
-				if (entry.getKey().equalsIgnoreCase("Css")) {
+				if ("Css".equalsIgnoreCase(entry.getKey())) {
 					File customCss = FileUtils.getFile(basePath
 							+ "css\\frontend.custom.css");
 					FileUtils.write(customCss, entry.getValue().toString());
-				} else if (entry.getKey().equalsIgnoreCase("JavaScript")) {
+				} else if ("JavaScript".equalsIgnoreCase(entry.getKey())) {
 					File customJs = FileUtils.getFile(basePath
 							+ "js\\frontend.custom.js");
 					FileUtils.write(customJs, entry.getValue().toString());
-				} else if (entry.getKey().equalsIgnoreCase("Image")) {
+				} else if ("Image".equalsIgnoreCase(entry.getKey())) {
 					File customImgDir = FileUtils.getFile(basePath + "\\img");
 					String[] paths = entry.getValue().toString().split(";");
-					for (String path : paths) {
-						FileUtils.copyFileToDirectory(FileUtils.getFile(path),
-								customImgDir);
-					}
-				} else if (entry.getKey().equalsIgnoreCase("Directory")) {
+					gl.linpeng.tools.builder.utils.FileUtils
+							.copyFilesToDirectory(paths, customImgDir);
+				} else if ("Directory".equalsIgnoreCase(entry.getKey())) {
 					File destDir = FileUtils.getFile(basePath + "\\lib");
 					String[] paths = entry.getValue().toString().split(";");
-					for (String path : paths) {
-						FileUtils.copyDirectoryToDirectory(
-								FileUtils.getFile(path), destDir);
-					}
+					gl.linpeng.tools.builder.utils.FileUtils
+							.copyDirectorysToDirectory(paths, destDir);
 				}
-				// TODO store as zip result
 
 			} catch (IOException e) {
-				logger.error("Frontend Build parse error. {}", e);
+				logger.error("Frontend Build CustomResult error. {}", e);
 			}
 		}
-		return this;
+		// zip result
+		gl.linpeng.tools.builder.utils.FileUtils.zip(basePath);
 	}
 
 	private void storeToContext(LocalStorageModule module,
@@ -96,8 +102,8 @@ public class FrontendBuildResult implements BuildResult {
 			String key = resource.getType().name();
 			String content = context.get(key) == null ? "" : context.get(key)
 					.toString();
-			if (ResourceType.Image.equals(resource.getType())
-					|| ResourceType.Directory.equals(resource.getType())) {
+			if (ResourceType.IMAGE.equals(resource.getType())
+					|| ResourceType.DIRECTORY.equals(resource.getType())) {
 				content += resource.getPath() + ";";
 			} else {
 				content += resource.getContent();

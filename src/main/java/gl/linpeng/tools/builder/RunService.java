@@ -25,6 +25,9 @@ import java.util.List;
  */
 public class RunService {
 
+	private RunService() {
+	}
+
 	public static void main(String[] args) {
 
 		Builder builder = new Builder();
@@ -38,26 +41,26 @@ public class RunService {
 
 		// register modules
 		JavascriptResource js = new JavascriptResource();
-		js.setType(ResourceType.JavaScript);
+		js.setType(ResourceType.JAVASCRIPT);
 		js.setSource(new File(basePath + "js\\app\\sinobest.image.js"));
 		LocalStorageModule module = new LocalStorageModule();
 		module.setId("image");
 		module.setName("image");
 		module.setType("file");
-		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>();
+		List<LocalStorageResource> resources = new ArrayList<>();
 		resources.add(js);
 		CssResource css = new CssResource();
-		css.setType(ResourceType.Css);
+		css.setType(ResourceType.CSS);
 		css.setSource(new File(basePath + "css\\sinobest.image.css"));
 		resources.add(css);
 
 		FileResource img1 = new FileResource();
-		img1.setType(ResourceType.Image);
+		img1.setType(ResourceType.IMAGE);
 		img1.setSource(new File(basePath + "img\\zoomin.cur"));
 		resources.add(img1);
 
 		FileResource img2 = new FileResource();
-		img2.setType(ResourceType.Image);
+		img2.setType(ResourceType.IMAGE);
 		img2.setSource(new File(basePath + "img\\photoTool.gif"));
 		resources.add(img2);
 
@@ -69,13 +72,13 @@ public class RunService {
 		dependency.setName("date");
 		dependency.setType("dir");
 
-		List<LocalStorageResource> resources2 = new ArrayList<LocalStorageResource>();
+		List<LocalStorageResource> resources2 = new ArrayList<>();
 		DirectoryResource dir = new DirectoryResource();
 		dir.setSource(new File(basePath + "js\\lib\\My97DatePicker"));
 		resources2.add(dir);
 
 		dependency.setResources(resources2);
-		List<Module> dependencies = new ArrayList<Module>();
+		List<Module> dependencies = new ArrayList<>();
 		dependencies.add(dependency);
 		module.setDependencies(dependencies);
 

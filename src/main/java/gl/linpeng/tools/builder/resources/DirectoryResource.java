@@ -11,6 +11,6 @@ import gl.linpeng.tools.builder.service.ResourceType;
  */
 public class DirectoryResource extends LocalStorageResource {
 	public DirectoryResource() {
-		this.setType(ResourceType.Directory);
+		this.setType(ResourceType.DIRECTORY);
 	}
 }
