@@ -1,6 +1,7 @@
 package gl.linpeng.tools.builder.service;
 
 import gl.linpeng.tools.builder.filters.Operation;
+import gl.linpeng.tools.builder.model.BuildModel;
 import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.result.BuildResult;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * one build result bean in the end.
  * 
  * @author linpeng
- *
+ * 
  */
 public interface BuildService {
 
@@ -36,12 +37,12 @@ public interface BuildService {
 	 * 
 	 * @return build result
 	 */
-	public BuildResult build();
+	public BuildResult build(BuildModel model);
 
 	/**
 	 * build service setup,load modules and operations canbe here.
 	 */
-	public void setup();
+	public void setup(BuildModel model);
 
 	/**
 	 * register module to service

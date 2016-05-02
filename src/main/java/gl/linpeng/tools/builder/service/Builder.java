@@ -1,6 +1,7 @@
 package gl.linpeng.tools.builder.service;
 
 import gl.linpeng.tools.builder.filters.Operation;
+import gl.linpeng.tools.builder.model.BuildModel;
 import gl.linpeng.tools.builder.module.LocalStorageModule;
 import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.result.BuildResult;
@@ -20,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * A sample builder implement
  * 
  * @author linpeng
- *
+ * 
  */
 public class Builder implements LocalStorageBuildService {
 	final Logger logger = LoggerFactory.getLogger(Builder.class);
@@ -82,14 +83,21 @@ public class Builder implements LocalStorageBuildService {
 	}
 
 	@Override
-	public BuildResult build() {
+	public BuildResult build(BuildModel model) {
 		// setup service
-		setup();
+		setup(model);
 		return buildResult.toResult(this);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void setup() {
+	public void setup(BuildModel model) {
+		List<LocalStorageModule> muildModules = (List<LocalStorageModule>) model
+				.getModules();
+		for (Module module : muildModules) {
+			registerModule(module);
+		}
+
 		loadOperations();
 		loadLocalStorageModules();
 	}
