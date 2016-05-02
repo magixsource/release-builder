@@ -68,7 +68,7 @@ public class FileUtils {
 					}
 				}, dirFilter);
 
-		List<LocalStorageResource> resources = new ArrayList<>(files.size());
+		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>(files.size());
 		for (File file : files) {
 			LocalStorageResource br = new LocalStorageResource();
 			if (file.getName().endsWith(".js")) {

@@ -15,7 +15,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>1.6</jdk.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,6 +33,11 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -42,6 +47,7 @@
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
+					<encoding>UTF-8</encoding> 
 				</configuration>
 			</plugin>
 			<!-- test surefire -->

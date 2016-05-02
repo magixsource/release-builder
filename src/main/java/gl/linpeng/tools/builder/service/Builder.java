@@ -28,7 +28,7 @@ public class Builder implements LocalStorageBuildService {
 	private List<LocalStorageModule> modules;
 	private List<Operation> operations;
 	// store handle result
-	private Map<String, Object> context = new HashMap<>();
+	private Map<String, Object> context = new HashMap<String, Object>();
 	private FrontendBuildResult buildResult = new FrontendBuildResult();
 
 	private boolean isModuleSorted = false;
@@ -46,9 +46,9 @@ public class Builder implements LocalStorageBuildService {
 
 		// re-sort modules, make dependencies in collections
 		if (!isModuleSorted) {
-			Set<LocalStorageModule> sortedModules = new HashSet<>();
+			Set<LocalStorageModule> sortedModules = new HashSet<LocalStorageModule>();
 			sortModules(modules, sortedModules);
-			modules = new ArrayList<>();
+			modules = new ArrayList<LocalStorageModule>();
 			modules.addAll(sortedModules);
 
 			isModuleSorted = true;
@@ -97,7 +97,7 @@ public class Builder implements LocalStorageBuildService {
 	@Override
 	public void registerModule(Module module) {
 		if (this.modules == null) {
-			this.modules = new ArrayList<>();
+			this.modules = new ArrayList<LocalStorageModule>();
 		}
 		LocalStorageModule localStorageModule = (LocalStorageModule) module;
 		this.modules.add(localStorageModule);
@@ -106,7 +106,7 @@ public class Builder implements LocalStorageBuildService {
 	@Override
 	public void registerOperation(Operation operation) {
 		if (this.operations == null) {
-			this.operations = new ArrayList<>();
+			this.operations = new ArrayList<Operation>();
 		}
 		this.operations.add(operation);
 	}
