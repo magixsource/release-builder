@@ -3,6 +3,7 @@ package gl.linpeng.tools.builder;
 import gl.linpeng.tools.builder.filters.CopyOperation;
 import gl.linpeng.tools.builder.filters.MinifyOperation;
 import gl.linpeng.tools.builder.filters.UglifyOperation;
+import gl.linpeng.tools.builder.model.LocalStorageBuildModel;
 import gl.linpeng.tools.builder.module.LocalStorageModule;
 import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.resources.CssResource;
@@ -21,7 +22,7 @@ import java.util.List;
  * Test enter of program
  * 
  * @author linpeng
- *
+ * 
  */
 public class RunService {
 
@@ -82,9 +83,13 @@ public class RunService {
 		dependencies.add(dependency);
 		module.setDependencies(dependencies);
 
-		builder.registerModule(module);
+		// builder.registerModule(module);
+		List<LocalStorageModule> modules = new ArrayList<LocalStorageModule>();
+		modules.add(module);
+		LocalStorageBuildModel model = new LocalStorageBuildModel();
+		model.setModules(modules);
 
-		builder.build();
+		builder.build(model);
 	}
 
 }
