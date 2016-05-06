@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.resources;
 
+import java.io.File;
+
 import gl.linpeng.tools.builder.service.ResourceType;
 
 /**
@@ -9,7 +11,13 @@ import gl.linpeng.tools.builder.service.ResourceType;
  *
  */
 public class CssResource extends FileResource {
+
 	public CssResource() {
 		this.setType(ResourceType.CSS);
+	}
+
+	public CssResource(String source) {
+		this();
+		this.setSource(new File(source));
 	}
 }
