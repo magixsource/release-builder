@@ -23,12 +23,12 @@ public class BaseResource implements Resource {
 
 	@Override
 	public Object getRaw() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	@Override
 	public String toText() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 }
