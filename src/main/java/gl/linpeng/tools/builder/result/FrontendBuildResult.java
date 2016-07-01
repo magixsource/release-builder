@@ -1,5 +1,6 @@
 package gl.linpeng.tools.builder.result;
 
+import gl.linpeng.tools.builder.filters.CopyOperation;
 import gl.linpeng.tools.builder.filters.Operation;
 import gl.linpeng.tools.builder.module.LocalStorageModule;
 import gl.linpeng.tools.builder.resources.LocalStorageResource;
@@ -36,6 +37,11 @@ public class FrontendBuildResult implements BuildResult {
 		LocalStorageBuildService localStorageService = (LocalStorageBuildService) service;
 
 		List<Operation> operations = localStorageService.loadOperations();
+		// Just in DEV mode, to easy add operations 2016-7-1 by LINPENG
+		if (null == operations) {
+			localStorageService.registerOperation(new CopyOperation());
+			operations = localStorageService.loadOperations();
+		}
 		List<LocalStorageModule> modules = localStorageService
 				.loadLocalStorageModules();
 		Map<String, Object> context = localStorageService.getContext();
@@ -65,16 +71,16 @@ public class FrontendBuildResult implements BuildResult {
 	 * @param context
 	 */
 	private void customResult(Map<String, Object> context) {
-		String basePath = FileUtils.getTempDirectoryPath();
+		String basePath = FileUtils.getTempDirectoryPath() + "result";
 		for (Map.Entry<String, Object> entry : context.entrySet()) {
 			try {
 				if ("Css".equalsIgnoreCase(entry.getKey())) {
 					File customCss = FileUtils.getFile(basePath
-							+ "css\\frontend.custom.css");
+							+ "\\css\\frontend.custom.css");
 					FileUtils.write(customCss, entry.getValue().toString());
 				} else if ("JavaScript".equalsIgnoreCase(entry.getKey())) {
 					File customJs = FileUtils.getFile(basePath
-							+ "js\\frontend.custom.js");
+							+ "\\js\\frontend.custom.js");
 					FileUtils.write(customJs, entry.getValue().toString());
 				} else if ("Image".equalsIgnoreCase(entry.getKey())) {
 					File customImgDir = FileUtils.getFile(basePath + "\\img");
