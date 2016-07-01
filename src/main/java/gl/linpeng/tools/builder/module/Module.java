@@ -8,12 +8,12 @@ import java.util.List;
  * @author linpeng
  * 
  */
-public class Module {
+public class Module<T extends Module> {
 
 	private String id;
 	private String name;
 	private String type;
-	private List<? extends Module> dependencies;
+	private List<T> dependencies;
 
 	public String getId() {
 		return id;
@@ -39,12 +39,11 @@ public class Module {
 		this.type = type;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List getDependencies() {
+	public List<T> getDependencies() {
 		return dependencies;
 	}
 
-	public void setDependencies(List<? extends Module> dependencies) {
+	public void setDependencies(List<T> dependencies) {
 		this.dependencies = dependencies;
 	}
 

@@ -2,6 +2,7 @@ package gl.linpeng.tools.builder.module;
 
 import gl.linpeng.tools.builder.resources.LocalStorageResource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +11,18 @@ import java.util.List;
  * @author linpeng
  *
  */
-public class LocalStorageModule extends Module {
+public class LocalStorageModule extends Module<LocalStorageModule> {
 
 	private List<LocalStorageResource> resources;
+
+	public LocalStorageModule() {
+
+	}
+
+	public LocalStorageModule(String id, String name) {
+		this.setId(id);
+		this.setName(name);
+	}
 
 	public List<LocalStorageResource> getResources() {
 		return resources;
@@ -20,6 +30,33 @@ public class LocalStorageModule extends Module {
 
 	public void setResources(List<LocalStorageResource> resources) {
 		this.resources = resources;
+	}
+
+	/**
+	 * Add resource
+	 * 
+	 * @param resource
+	 */
+	public void addResource(LocalStorageResource resource) {
+		if (resources == null) {
+			resources = new ArrayList<LocalStorageResource>();
+		}
+		resources.add(resource);
+	}
+
+	/**
+	 * add dependency
+	 * 
+	 * @param base
+	 */
+	@SuppressWarnings("unchecked")
+	public void addDependency(LocalStorageModule module) {
+		List<LocalStorageModule> modules = this.getDependencies();
+		if (null == modules) {
+			modules = new ArrayList<LocalStorageModule>();
+		}
+		modules.add(module);
+		this.setDependencies(modules);
 	}
 
 }
