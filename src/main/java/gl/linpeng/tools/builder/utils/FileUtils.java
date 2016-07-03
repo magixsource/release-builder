@@ -68,7 +68,8 @@ public class FileUtils {
 					}
 				}, dirFilter);
 
-		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>(files.size());
+		List<LocalStorageResource> resources = new ArrayList<LocalStorageResource>(
+				files.size());
 		for (File file : files) {
 			LocalStorageResource br = new LocalStorageResource();
 			if (file.getName().endsWith(".js")) {
@@ -154,10 +155,10 @@ public class FileUtils {
 		if (!file.exists()) {
 			return;
 		}
-		String parentPath = file.getParent();
 		FileOutputStream fileOutputStream;
 		try {
-			fileOutputStream = new FileOutputStream(parentPath + file.getName()
+
+			fileOutputStream = new FileOutputStream(file.getPath()
 					+ ZIP_FILE_SUFFIX);
 			CheckedOutputStream cos = new CheckedOutputStream(fileOutputStream,
 					new CRC32());
