@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.result;
 
+import java.io.File;
+
 import gl.linpeng.tools.builder.service.BuildService;
 
 /**
@@ -23,5 +25,12 @@ public interface BuildResult {
 	 * @return
 	 */
 	public String toText();
+
+	/**
+	 * Get buildResult if it's file
+	 * 
+	 * @return
+	 */
+	public File getFile();
 
 }

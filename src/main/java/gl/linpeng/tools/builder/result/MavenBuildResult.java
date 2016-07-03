@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.result;
 
+import java.io.File;
+
 import gl.linpeng.tools.builder.service.BuildService;
 
 /**
@@ -17,6 +19,11 @@ public class MavenBuildResult implements BuildResult {
 
 	@Override
 	public BuildResult toResult(BuildService service) {
+		return null;
+	}
+
+	@Override
+	public File getFile() {
 		return null;
 	}
 

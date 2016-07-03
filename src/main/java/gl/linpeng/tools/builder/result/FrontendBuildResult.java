@@ -27,6 +27,8 @@ public class FrontendBuildResult implements BuildResult {
 
 	final Logger logger = LoggerFactory.getLogger(FrontendBuildResult.class);
 
+	private File file;
+
 	@Override
 	public String toText() {
 		return null;
@@ -100,6 +102,7 @@ public class FrontendBuildResult implements BuildResult {
 		}
 		// zip result
 		gl.linpeng.tools.builder.utils.FileUtils.zip(basePath);
+		this.file = FileUtils.getFile(basePath + ".zip");
 	}
 
 	private void storeToContext(LocalStorageModule module,
@@ -130,6 +133,11 @@ public class FrontendBuildResult implements BuildResult {
 				operation.onProcess(resource);
 			}
 		}
+	}
+
+	@Override
+	public File getFile() {
+		return this.file;
 	}
 
 }
