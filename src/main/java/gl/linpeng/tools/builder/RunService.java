@@ -5,7 +5,6 @@ import gl.linpeng.tools.builder.filters.MinifyOperation;
 import gl.linpeng.tools.builder.filters.UglifyOperation;
 import gl.linpeng.tools.builder.model.LocalStorageBuildModel;
 import gl.linpeng.tools.builder.module.LocalStorageModule;
-import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.resources.CssResource;
 import gl.linpeng.tools.builder.resources.DirectoryResource;
 import gl.linpeng.tools.builder.resources.FileResource;
@@ -79,7 +78,7 @@ public class RunService {
 		resources2.add(dir);
 
 		dependency.setResources(resources2);
-		List<Module> dependencies = new ArrayList<Module>();
+		List<LocalStorageModule> dependencies = new ArrayList<LocalStorageModule>();
 		dependencies.add(dependency);
 		module.setDependencies(dependencies);
 
