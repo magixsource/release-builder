@@ -8,7 +8,7 @@ import java.util.List;
  * @author linpeng
  * 
  */
-public class Module<T extends Module> {
+public class Module<T extends Module<T>> {
 
 	private String id;
 	private String name;

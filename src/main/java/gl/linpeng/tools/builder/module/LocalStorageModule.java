@@ -49,7 +49,6 @@ public class LocalStorageModule extends Module<LocalStorageModule> {
 	 * 
 	 * @param base
 	 */
-	@SuppressWarnings("unchecked")
 	public void addDependency(LocalStorageModule module) {
 		List<LocalStorageModule> modules = this.getDependencies();
 		if (null == modules) {

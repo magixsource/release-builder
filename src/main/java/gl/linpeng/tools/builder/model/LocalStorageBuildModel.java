@@ -1,7 +1,6 @@
 package gl.linpeng.tools.builder.model;
 
 import gl.linpeng.tools.builder.module.LocalStorageModule;
-import gl.linpeng.tools.builder.module.Module;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class LocalStorageBuildModel implements BuildModel {
 	private List<LocalStorageModule> modules;
 
 	@Override
-	public List<? extends Module> getModules() {
+	public List<LocalStorageModule> getModules() {
 		return modules;
 	}
 

@@ -15,6 +15,6 @@ public interface BuildModel {
 	 * 
 	 * @return
 	 */
-	public List<? extends gl.linpeng.tools.builder.module.Module> getModules();
+	public List<? extends gl.linpeng.tools.builder.module.Module<?>> getModules();
 
 }
