@@ -10,7 +10,8 @@ import java.util.List;
  * @author linpeng
  *
  */
-public interface LocalStorageBuildService extends BuildService {
+public interface LocalStorageBuildService extends
+		BuildService<LocalStorageModule> {
 
 	/**
 	 * load localstorage modules

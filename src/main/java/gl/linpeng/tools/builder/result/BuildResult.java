@@ -1,8 +1,9 @@
 package gl.linpeng.tools.builder.result;
 
-import java.io.File;
-
+import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.service.BuildService;
+
+import java.io.File;
 
 /**
  * Build result Model,BuildResult is a result of process after builderService
@@ -10,14 +11,14 @@ import gl.linpeng.tools.builder.service.BuildService;
  * @author linpeng
  *
  */
-public interface BuildResult {
+public interface BuildResult<T extends Module<T>> {
 
 	/**
 	 * According modules and operations parse to a really buildresult
 	 * 
 	 * @return
 	 */
-	public BuildResult toResult(BuildService service);
+	public BuildResult<T> toResult(BuildService<T> service);
 
 	/**
 	 * Parse BuildResult to readable string

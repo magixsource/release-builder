@@ -3,7 +3,6 @@ package gl.linpeng.tools.builder.service;
 import gl.linpeng.tools.builder.filters.Operation;
 import gl.linpeng.tools.builder.model.BuildModel;
 import gl.linpeng.tools.builder.module.LocalStorageModule;
-import gl.linpeng.tools.builder.module.Module;
 import gl.linpeng.tools.builder.result.BuildResult;
 import gl.linpeng.tools.builder.result.FrontendBuildResult;
 
@@ -64,7 +63,6 @@ public class Builder implements LocalStorageBuildService {
 	 * @param modules
 	 * @param sortedModules
 	 */
-	@SuppressWarnings("unchecked")
 	private void sortModules(List<LocalStorageModule> modules,
 			Set<LocalStorageModule> sortedModules) {
 		for (LocalStorageModule module : modules) {
@@ -78,12 +76,12 @@ public class Builder implements LocalStorageBuildService {
 	}
 
 	@Override
-	public List<Module> loadModules() {
+	public List<LocalStorageModule> loadModules() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public BuildResult build(BuildModel model) {
+	public BuildResult<LocalStorageModule> build(BuildModel model) {
 		// setup service
 		setup(model);
 		return buildResult.toResult(this);
@@ -94,21 +92,12 @@ public class Builder implements LocalStorageBuildService {
 	public void setup(BuildModel model) {
 		List<LocalStorageModule> muildModules = (List<LocalStorageModule>) model
 				.getModules();
-		for (Module module : muildModules) {
+		for (LocalStorageModule module : muildModules) {
 			registerModule(module);
 		}
 
 		loadOperations();
 		loadLocalStorageModules();
-	}
-
-	@Override
-	public void registerModule(Module module) {
-		if (this.modules == null) {
-			this.modules = new ArrayList<LocalStorageModule>();
-		}
-		LocalStorageModule localStorageModule = (LocalStorageModule) module;
-		this.modules.add(localStorageModule);
 	}
 
 	@Override
@@ -134,6 +123,16 @@ public class Builder implements LocalStorageBuildService {
 
 	public void setBuildResult(FrontendBuildResult buildResult) {
 		this.buildResult = buildResult;
+	}
+
+	@Override
+	public void registerModule(LocalStorageModule module) {
+		if (this.modules == null) {
+			this.modules = new ArrayList<LocalStorageModule>();
+		}
+		LocalStorageModule localStorageModule = (LocalStorageModule) module;
+		this.modules.add(localStorageModule);
+
 	}
 
 }

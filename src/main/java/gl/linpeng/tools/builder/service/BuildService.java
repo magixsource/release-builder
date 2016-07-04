@@ -15,14 +15,14 @@ import java.util.Map;
  * @author linpeng
  * 
  */
-public interface BuildService {
+public interface BuildService<T extends Module<T>> {
 
 	/**
 	 * Load modules to service
 	 * 
 	 * @return modules
 	 */
-	public List<Module> loadModules();
+	public List<T> loadModules();
 
 	/**
 	 * Load operations if operations is null
@@ -37,7 +37,7 @@ public interface BuildService {
 	 * 
 	 * @return build result
 	 */
-	public BuildResult build(BuildModel model);
+	public BuildResult<T> build(BuildModel model);
 
 	/**
 	 * build service setup,load modules and operations canbe here.
@@ -49,7 +49,7 @@ public interface BuildService {
 	 * 
 	 * @param module
 	 */
-	public void registerModule(Module module);
+	public void registerModule(T module);
 
 	/**
 	 * register operation to service

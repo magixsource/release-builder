@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @author linpeng
  *
  */
-public class FrontendBuildResult implements BuildResult {
+public class FrontendBuildResult implements BuildResult<LocalStorageModule> {
 
 	final Logger logger = LoggerFactory.getLogger(FrontendBuildResult.class);
 
@@ -35,7 +35,8 @@ public class FrontendBuildResult implements BuildResult {
 	}
 
 	@Override
-	public BuildResult toResult(BuildService service) {
+	public BuildResult<LocalStorageModule> toResult(
+			BuildService<LocalStorageModule> service) {
 		LocalStorageBuildService localStorageService = (LocalStorageBuildService) service;
 
 		List<Operation> operations = localStorageService.loadOperations();

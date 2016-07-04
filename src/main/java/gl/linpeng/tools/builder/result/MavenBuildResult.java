@@ -1,8 +1,9 @@
 package gl.linpeng.tools.builder.result;
 
-import java.io.File;
-
+import gl.linpeng.tools.builder.module.LocalStorageModule;
 import gl.linpeng.tools.builder.service.BuildService;
+
+import java.io.File;
 
 /**
  * Maven build result parse result as a pom.xml
@@ -10,7 +11,7 @@ import gl.linpeng.tools.builder.service.BuildService;
  * @author linpeng
  *
  */
-public class MavenBuildResult implements BuildResult {
+public class MavenBuildResult implements BuildResult<LocalStorageModule> {
 
 	@Override
 	public String toText() {
@@ -18,7 +19,8 @@ public class MavenBuildResult implements BuildResult {
 	}
 
 	@Override
-	public BuildResult toResult(BuildService service) {
+	public BuildResult<LocalStorageModule> toResult(
+			BuildService<LocalStorageModule> service) {
 		return null;
 	}
 
