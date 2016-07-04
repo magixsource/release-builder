@@ -1,5 +1,7 @@
 package gl.linpeng.tools.builder.model;
 
+import gl.linpeng.tools.builder.module.Module;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,6 @@ public interface BuildModel {
 	 * 
 	 * @return
 	 */
-	public List<? extends gl.linpeng.tools.builder.module.Module<?>> getModules();
+	public List<? extends Module<?>> getModules();
 
 }
