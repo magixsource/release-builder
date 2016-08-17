@@ -22,8 +22,6 @@ public class LocalStorageResource extends BaseResource {
 
 	public LocalStorageResource(File file) {
 		this.source = file;
-		this.path = file.getPath();
-		this.root = file.getParent();
 		this.content = FileUtils.readContent(this);
 		
 		if (file.getName().endsWith(".js")) {
