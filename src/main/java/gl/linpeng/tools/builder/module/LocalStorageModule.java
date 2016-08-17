@@ -24,6 +24,12 @@ public class LocalStorageModule extends Module<LocalStorageModule> {
 		this.setName(name);
 	}
 
+	public LocalStorageModule(String id, String name, String type) {
+		this.setId(id);
+		this.setName(name);
+		this.setType(type);
+	}
+
 	public List<LocalStorageResource> getResources() {
 		return resources;
 	}
