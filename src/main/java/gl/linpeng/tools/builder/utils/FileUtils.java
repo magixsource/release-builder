@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
@@ -83,6 +84,22 @@ public class FileUtils {
 			resources.add(br);
 		}
 		return resources;
+	}
+
+	/**
+	 * 将根目录下的文件转为模块集合
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public static List<LocalStorageResource> getModules(File root,
+			IOFileFilter filter) {
+
+		// 列出所有.JS文件
+		Collection<File> files = org.apache.commons.io.FileUtils.listFiles(
+				root, filter, filter);
+		return files.stream().map(f -> new LocalStorageResource(f))
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -234,4 +251,5 @@ public class FileUtils {
 			logger.error("Compress file error, file {}.{}", file, e);
 		}
 	}
+
 }
