@@ -61,7 +61,7 @@ public class FrontendBuildResult implements BuildResult<LocalStorageModule> {
 			storeToContext(module, context);
 		}
 
-		logger.info("final process result -> {}", context);
+		logger.debug("final process result -> {}", context);
 
 		// final custom result
 		customResult(context);
