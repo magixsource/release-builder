@@ -1,5 +1,6 @@
 package gl.linpeng.tools.builder.resources;
 
+import gl.linpeng.tools.builder.service.ResourceType;
 import gl.linpeng.tools.builder.utils.FileUtils;
 
 import java.io.File;
@@ -15,6 +16,22 @@ public class LocalStorageResource extends BaseResource {
 	private String path;
 	private File source;
 	private String content;
+
+	public LocalStorageResource() {
+	}
+
+	public LocalStorageResource(File file) {
+		this.source = file;
+		this.path = file.getPath();
+		this.root = file.getParent();
+		this.content = FileUtils.readContent(this);
+		
+		if (file.getName().endsWith(".js")) {
+			this.setType(ResourceType.JAVASCRIPT);
+		} else if (file.getName().endsWith(".css")) {
+			this.setType(ResourceType.CSS);
+		}
+	}
 
 	public String getRoot() {
 		return root;
