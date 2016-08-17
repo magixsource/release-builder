@@ -15,7 +15,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.8</jdk.version>
 	</properties>
 	<dependencies>
 		<dependency>
