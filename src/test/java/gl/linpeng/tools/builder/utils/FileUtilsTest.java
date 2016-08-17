@@ -4,6 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 本地文件工具测试类
+ * @author linpeng
+ *
+ */
 public class FileUtilsTest {
 
 	@Before
